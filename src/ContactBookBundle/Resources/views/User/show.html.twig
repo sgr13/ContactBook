@@ -22,35 +22,43 @@
             <td>{{ user.description }}</td>
         </tr>
         <tr>
-            <th>Telefony</th>
-            {% for phone in phones %}
-            <td>{{ phone.phoneNr }}<br>{{ phone.type }}</td>
-            {% endfor %}
+            {% if phones|length != 0 %}
+                <th>Telefony</th>
+                {% for phone in phones %}
+                    <td>{{ phone.phoneNr }}<br>{{ phone.type }}</td>
+                {% endfor %}
+            {% endif %}
         </tr>
         <tr>
-            <th>E-mail</th>
-            {% for mail in mails %}
-                <td>{{ mail.mail }}<br>{{ mail.type }}</td>
-            {% endfor %}
+            {% if mails|length != 0 %}
+                <th>E-mail</th>
+                {% for mail in mails %}
+                    <td>{{ mail.mail }}<br>{{ mail.type }}</td>
+                {% endfor %}
+            {% endif %}
         </tr>
         <tr>
-            <th>Adres</th>
-            {% for address in address %}
-                <td>{{ address.city }}<br>ul.{{ address.street }}{{ address.houseNr }}/{{ address.appartmentNr }}</td>
-            {% endfor %}
+            {% if address|length != 0 %}
+                <th>Adres</th>
+                {% for address in address %}
+                    <td>{{ address.city }}<br>ul.{{ address.street }}{{ address.houseNr }}/{{ address.appartmentNr }}
+                    </td>
+                {% endfor %}
+            {% endif %}
         </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('userShowAll') }}"><button>Powrót</button></a>
-        </li>
-        <li>
-            <a href="{{ path('userEdit', { 'id': user.id }) }}"><button>Edytuj</button></a>
-        </li>
-        <li>
-            <input type="submit" value="Delete">
-        </li>
-    </ul>
+    <a href="{{ path('userShowAll') }}">
+        <button type="button" class="btn btn-info">Powrót</button>
+    </a>
+
+    <a href="{{ path('userEdit', { 'id': user.id }) }}">
+        <button type="button" class="btn btn-success">Edytuj</button>
+    </a>
+
+    <a href="{{ path('userDelete', { 'id': user.id }) }}">
+        <button type="button" class="btn btn-danger">Usuń</button>
+    </a>
+
 {% endblock %}

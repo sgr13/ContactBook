@@ -71,7 +71,6 @@ class PhoneController extends Controller
      */
     public function deletePhoneAction($id)
     {
-        var_dump($id);
         $em = $this->getDoctrine()->getManager();
         $phone = $em->getRepository('ContactBookBundle:Phone')->find($id);
         $userId = $phone->getUser()->getId();

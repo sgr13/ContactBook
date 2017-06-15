@@ -6,6 +6,7 @@ use ContactBookBundle\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AddressController extends Controller
 {
@@ -59,13 +60,22 @@ class AddressController extends Controller
     }
 
     /**
-     * @Route("/deleteAddress", name="deleteAddress")
+     * @Route("/deleteAddress/{id}", name="deleteAddress")
      */
-    public function deleteAddressAction()
+    public function deleteAddressAction($id)
     {
-        return $this->render('ContactBookBundle:Address:delete_address.html.twig', array(
-            // ...
-        ));
+        $em = $this->getDoctrine()->getManager();
+        $address = $em->getRepository('ContactBookBundle:Address')->find($id);
+        $userId = $address->getUser()->getId();
+
+        if (!$address) {
+            throw new NotFoundHttpException('Nie znaleziono adresu');
+        }
+
+        $em->remove($address);
+        $em->flush();
+
+        return $this->redirectToRoute('userEdit', array('id' => $userId));
     }
 
 }

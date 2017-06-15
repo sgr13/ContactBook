@@ -5,7 +5,7 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Dodaj" />
+    <input type="submit" value="Dodaj" type="button" class="btn btn-success"/>
     {{ form_end(form) }}
 
     {% if phones|length >0 %}
@@ -13,9 +13,13 @@
         <h3>Edytuj nr telefonu:</h3>
         {% for phone in phones %}
             <p>
-                {{ phone.phoneNr }}
-                <a href="{{ path('editPhone', {'id': phone.id}) }}"> | Edytuj</a>
-                <a href="{{ path('deletePhone', {'id': phone.id}) }}"> | Usuń</a>
+                <b>{{ phone.phoneNr }}</b>
+                <a href="{{ path('editPhone', {'id': phone.id}) }}">
+                    <button type="button" class="btn btn-success">Edytuj</button>
+                </a>
+                <a href="{{ path('deletePhone', {'id': phone.id}) }}">
+                    <button type="button" class="btn btn-danger">Usuń</button>
+                </a>
             </p>
         {% endfor %}
 
@@ -26,8 +30,13 @@
         <h3>Edytuj E-mail:</h3>
         {% for mail in mails %}
             <p>
-                {{ mail.mail }}<a href="{{ path('editMail', {'id': mail.id}) }}"> | Edytuj</a>
-                {{ mail.mail }}<a href="{{ path('deleteMail', {'id': mail.id}) }}"> | Usuń</a>
+                {{ mail.mail }}
+                <a href="{{ path('editMail', {'id': mail.id}) }}">
+                    <button type="button" class="btn btn-success">Edytuj</button>
+                </a>
+                <a href="{{ path('deleteMail', {'id': mail.id}) }}">
+                    <button type="button" class="btn btn-danger">Usuń</button>
+                </a>
             </p>
         {% endfor %}
 
@@ -39,13 +48,19 @@
         {% for address in address %}
             <p>
                 {{ address.city }} ul.{{ address.street }} {{ address.houseNr }}/{{ address.appartmentNr }}
-                <a href="{{ path('editAddress', {'id': address.id}) }}"> | Edytuj</a>
-                <a href="{{ path('deleteAddress', {'id': address.id}) }}"> | Usuń</a>
+                <a href="{{ path('editAddress', {'id': address.id}) }}">
+                    <button type="button" class="btn btn-success">Edytuj</button>
+                </a>
+                <a href="{{ path('deleteAddress', {'id': address.id}) }}">
+                    <button type="button" class="btn btn-danger">Usuń</button>
+                </a>
             </p>
         {% endfor %}
 
     {% endif %}
 
-    <a href="{{ path('userShowAll') }}"><button>Powrót</button></a>
+    <a href="{{ path('userShowAll') }}">
+        <button type="button" class="btn btn-info">Powrót</button>
+    </a>
 
 {% endblock %}

@@ -2,22 +2,21 @@ body {
     background-color: lightblue;
 }
 
-table, th, td {
-
-}
 
 table {
-    width: 50%;
+    width: 75%;
     text-align: center;
 }
 
 th {
     height: 50px;
+    text-align: center;
 }
 
 th, td {
     padding: 5px;
     border-bottom: 1px solid black;
+    font-size: 130%;
 }
 
 button:hover {
@@ -25,10 +24,14 @@ button:hover {
 }
 
 .mainContainer {
-    margin-left: 360px;
-    margin-right: 360px;
+    margin-left: 160px;
+    margin-right: 160px;
 }
 
 input[type="submit"]:hover {
     cursor:pointer;
+}
+
+#main {
+    text-align: center;
 }

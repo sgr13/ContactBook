@@ -6,6 +6,7 @@ use ContactBookBundle\Entity\Mail;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MailController extends Controller
 {
@@ -59,13 +60,22 @@ class MailController extends Controller
     }
 
     /**
-     * @Route("/deleteMail", name="deleteMail")
+     * @Route("/deleteMail/{id}", name="deleteMail")
      */
-    public function deleteMailAction()
+    public function deleteMailAction($id)
     {
-        return $this->render('ContactBookBundle:Mail:delete_mail.html.twig', array(
-            // ...
-        ));
+        $em = $this->getDoctrine()->getManager();
+        $mail = $em->getRepository('ContactBookBundle:Mail')->find($id);
+        $userId = $mail->getUser()->getId();
+
+        if (!$mail) {
+            throw new NotFoundHttpException('Nie znaleziono adresu e-mail');
+        }
+
+        $em->remove($mail);
+        $em->flush();
+
+        return $this->redirectToRoute('userEdit', array('id' => $userId));
     }
 
 }

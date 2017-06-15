@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Lista kontaktów</h1>
-    <table class="table">
+    <h1 id="main">Lista kontaktów</h1>
+    <table class="table" id="mainTable">
         <thead>
         <tr>
             <th>Id</th>
@@ -20,17 +20,18 @@
                 <td>{{ user.surname }}</td>
                 <td>{{ user.description }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('userShow', { 'id': user.id }) }}"><button>Pokaż</button></a>
-                        </li>
-                        <li>
-                            <a href="{{ path('userEdit', { 'id': user.id }) }}"><button>Edytuj</button></a>
-                        </li>
-                        <li>
-                            <a href="{{ path('userDelete', { 'id': user.id }) }}"><button>Usuń</button></a>
-                        </li>
-                    </ul>
+
+                    <a href="{{ path('userShow', { 'id': user.id }) }}">
+                        <button type="button" class="btn btn-success">Pokaż</button>
+                    </a>
+
+                    <a href="{{ path('userEdit', { 'id': user.id }) }}">
+                        <button type="button" class="btn btn-info">Edytuj</button>
+                    </a>
+
+                    <a href="{{ path('userDelete', { 'id': user.id }) }}">
+                        <button type="button" class="btn btn-danger">Usuń</button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
@@ -39,7 +40,9 @@
 
     <ul>
         <li>
-            <a href="{{ path('userNew') }}"><button>Dodaj nowy kontakt </button></a>
+            <a href="{{ path('userNew') }}">
+                <button>Dodaj nowy kontakt</button>
+            </a>
         </li>
     </ul>
 {% endblock %}

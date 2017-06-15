@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('ContactBookBundle:User')->findAll();
+        $users = $em->getRepository('ContactBookBundle:User')->findBy(array(), array('surname' => 'DESC'));
 
         return $this->render('ContactBookBundle:User:show_all.html.twig', array(
             'users' => $users,
@@ -95,6 +95,31 @@ class UserController extends Controller
         if (!$user) {
             throw new NotFoundHttpException('Nie znaleziono użytkownika');
         }
+
+        $phones = $em->getRepository('ContactBookBundle:Phone')->findByUser($id);
+        if ($phones) {
+            foreach ($phones as $phone) {
+                $em->remove($phone);
+                $em->flush();
+            }
+        }
+
+        $mails = $em->getRepository('ContactBookBundle:Mail')->findByUser($id);
+        if ($mails) {
+            foreach ($mails as $mail) {
+                $em->remove($mail);
+                $em->flush();
+            }
+        }
+
+        $address = $em->getRepository('ContactBookBundle:Address')->findByUser($id);
+        if ($address) {
+            foreach ($address as $address) {
+                $em->remove($address);
+                $em->flush();
+            }
+        }
+
         $em->remove($user);
         $em->flush();
 
