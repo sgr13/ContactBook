@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lista kontaktów</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Opis</th>
+            <th>Działania</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users|reverse(true) %}
+            <tr>
+                <td><a href="{{ path('userShow', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('userShow', { 'id': user.id }) }}"><button>Pokaż</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ path('userEdit', { 'id': user.id }) }}"><button>Edytuj</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ path('userDelete', { 'id': user.id }) }}"><button>Usuń</button></a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('userNew') }}"><button>Dodaj nowy kontakt </button></a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nowy kontakt</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Dodaj" />
+    {{ form_end(form) }}
+
+    {% if phones|length >0 %}
+
+        <h3>Edytuj nr telefonu:</h3>
+        {% for phone in phones %}
+            <p>
+                {{ phone.phoneNr }}
+                <a href="{{ path('editPhone', {'id': phone.id}) }}"> | Edytuj</a>
+                <a href="{{ path('deletePhone', {'id': phone.id}) }}"> | Usuń</a>
+            </p>
+        {% endfor %}
+
+    {% endif %}
+
+    {% if mails|length != 0 %}
+
+        <h3>Edytuj E-mail:</h3>
+        {% for mail in mails %}
+            <p>
+                {{ mail.mail }}<a href="{{ path('editMail', {'id': mail.id}) }}"> | Edytuj</a>
+                {{ mail.mail }}<a href="{{ path('deleteMail', {'id': mail.id}) }}"> | Usuń</a>
+            </p>
+        {% endfor %}
+
+    {% endif %}
+
+    {% if address|length != 0 %}
+
+        <h3>Edytujadres adres:</h3>
+        {% for address in address %}
+            <p>
+                {{ address.city }} ul.{{ address.street }} {{ address.houseNr }}/{{ address.appartmentNr }}
+                <a href="{{ path('editAddress', {'id': address.id}) }}"> | Edytuj</a>
+                <a href="{{ path('deleteAddress', {'id': address.id}) }}"> | Usuń</a>
+            </p>
+        {% endfor %}
+
+    {% endif %}
+
+    <a href="{{ path('userShowAll') }}"><button>Powrót</button></a>
+
+{% endblock %}

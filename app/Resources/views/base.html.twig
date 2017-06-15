@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Książka kontaktowa{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" media="screen" />
+</head>
+<body>
+<div id="topPanel">
+    <a href="http://localhost:8000/showAll">Kontakty</a> |<a href="http://localhost:8000/newPhone">Telefon</a> |<a href="http://localhost:8000/newMail">Email</a> |<a href="http://localhost:8000/newAddress">Adres</a>
+</div>
+<hr>
+<div class="mainContainer">
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</div>
+</body>
 </html>

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Dane kontaktu</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Imię</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <th>Nazwisko</th>
+            <td>{{ user.surname }}</td>
+        </tr>
+        <tr>
+            <th>Opis</th>
+            <td>{{ user.description }}</td>
+        </tr>
+        <tr>
+            <th>Telefony</th>
+            {% for phone in phones %}
+            <td>{{ phone.phoneNr }}<br>{{ phone.type }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>E-mail</th>
+            {% for mail in mails %}
+                <td>{{ mail.mail }}<br>{{ mail.type }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Adres</th>
+            {% for address in address %}
+                <td>{{ address.city }}<br>ul.{{ address.street }}{{ address.houseNr }}/{{ address.appartmentNr }}</td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('userShowAll') }}"><button>Powrót</button></a>
+        </li>
+        <li>
+            <a href="{{ path('userEdit', { 'id': user.id }) }}"><button>Edytuj</button></a>
+        </li>
+        <li>
+            <input type="submit" value="Delete">
+        </li>
+    </ul>
+{% endblock %}
